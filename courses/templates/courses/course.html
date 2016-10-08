@@ -1,0 +1,26 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
+
+{# Lecutres list #}
+<div class="row" style="margin: 0 auto;">
+    <h2>{{ course.name }}</h2>
+    <h3>{{ course.teacher }}</h3>
+    <img src="{{ course.course_logo }}">
+    <div class="col-md-6">
+        <ul class="list-group">
+            {% for lecture in course.lecture_set.all %}
+            <li class="list-group-item"><a href="{{ lecture.lecture_url }}/"> {{ lecture.lecture_name }} </a><span
+                    class="badge">{{ lecture.file_type }}</span></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

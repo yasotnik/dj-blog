@@ -1,0 +1,25 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{# Courses list #}
+{% if all_courses %}
+<div class="row" style="margin: 0 auto;">
+    <div class="col-md-6">
+        <ul class="list-group">
+            {% for course in all_courses %}
+            <li class="list-group-item"><a href="{{ course.id }}/"> {{ course.name }} </a><span
+                    class="badge">{{ course.lecture_set.count }}</span></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% else %}
+<h1> ERROR - you have no courses in DB </h1>
+{% endif %}
