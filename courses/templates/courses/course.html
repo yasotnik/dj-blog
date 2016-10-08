@@ -11,16 +11,16 @@
 
 
 {# Lecutres list #}
-<div class="row" style="margin: 0 auto;">
-    <h2>{{ course.name }}</h2>
-    <h3>{{ course.teacher }}</h3>
-    <img src="{{ course.course_logo }}">
-    <div class="col-md-6">
-        <ul class="list-group">
-            {% for lecture in course.lecture_set.all %}
+<div class="wrapper" style="width: 50%; margin: 0 auto;">
+    <div class="course-info" style="width: 50%; margin: 0 auto; text-align: center">
+        <h2>{{ course.name }}</h2>
+        <img src="{{ course.course_logo }}" style="width: 110px; height: 110px;">
+        <h3>by {{ course.teacher }}</h3>
+    </div>
+    <ul class="list-group">
+        {% for lecture in course.lecture_set.all %}
             <li class="list-group-item"><a href="{{ lecture.lecture_url }}/"> {{ lecture.lecture_name }} </a><span
                     class="badge">{{ lecture.file_type }}</span></li>
-            {% endfor %}
-        </ul>
-    </div>
+        {% endfor %}
+    </ul>
 </div>
