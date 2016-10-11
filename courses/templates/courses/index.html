@@ -1,29 +1,51 @@
-{# Load the tag library #}
-{% load bootstrap3 %}
-
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
-
+{% extends "courses/base.html" %}
+{% block title %}Courses List{% endblock %}
+{% block content %}
 {# Courses list #}
-{% if all_courses %}
-    <div class="container" style="width: 50%; margin: 0 auto;">
-        <div class="jumbotron" style="margin-top: 20px;">
-            <h1> Courses List</h1>
-            <p> Here you can see all available courses for you</p>
+    {% if all_courses %}
+        <div class="container" style="width: 50%; margin: 0 auto;">
+            <div class="jumbotron" style="margin-top: 20px;">
+                <h1> Courses List</h1>
+                <p> Here you can see all available courses for you</p>
+            </div>
+            {% if error_msg %}
+                <div class="alert-danger"> {{ error_msg }}</div>
+            {% endif %}
+        <div class="row">
+            <div class="col-md-12" style="">
+                <ul class="list-group" >
+                    {% for course in all_courses %}
+                    <li class="list-group-item" style="height: 60px;">
+                        <div class="col-md-3">
+                            <a href="{% url 'courses:course_info' course.id %}">{{ course.name }}</a>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-2">
+                            {% if course.is_followed %}
+                                <form action="{% url 'courses:un_follow' %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-default pull-right"
+                                            value="{{ forloop.counter }}"name="course">Unfollow</button>
+                                </form>
+                                {% else %}
+                                    <form action="{% url 'courses:follow' %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-info pull-right"
+                                            value="{{ forloop.counter }}"name="course">Follow</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-1">
+                            <span class="badge pull-right">{{ course.lecture_set.count }}</span>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-        <div class="" >
-            <table class="table table-hover ">
-                {% for course in all_courses %}
-                <tr><td><a href="{{ course.id }}/"> {{ course.name }} </a></td><td><span
-                                class="badge pull-right">{{ course.lecture_set.count }}</span></td></tr>
-                {% endfor %}
-            </table>
         </div>
-    </div>
-{% else %}
-<h1> ERROR - you have no courses in DB </h1>
-{% endif %}
+    {% else %}
+        <h1> ERROR - you have no courses in DB </h1>
+    {% endif %}
+{% endblock content %}

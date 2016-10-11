@@ -7,6 +7,7 @@ class Course(models.Model):
     length = models.IntegerField()
     field = models.CharField(max_length=150)
     course_logo = models.CharField(max_length=1000)
+    is_followed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name + " by " + self.teacher

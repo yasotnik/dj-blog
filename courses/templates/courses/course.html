@@ -1,15 +1,6 @@
-{# Load the tag library #}
-{% load bootstrap3 %}
-
-{# Load CSS and JavaScript #}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
-
-
-
+{% extends "courses/base.html" %}
+{% block title %}{{ course.name }} by {{ course.teacher }}{% endblock %}
+{% block content %}
 {# Lecutres list #}
 <div class="container" style="width: 50%; margin: 0 auto;">
     <div class="course-info " style="text-align: center">
@@ -19,6 +10,7 @@
             <p> by {{ course.teacher }} </p>
         </div>
     </div>
+    Lectures list:
     <ul class="list-group">
         {% for lecture in course.lecture_set.all %}
             <li class="list-group-item"><a href="{{ lecture.lecture_url }}/"> {{ lecture.lecture_name }} </a><span
@@ -26,3 +18,4 @@
         {% endfor %}
     </ul>
 </div>
+{% endblock content %}
