@@ -3,8 +3,8 @@
 {% block content %}
 {# Courses list #}
     {% if all_courses %}
-        <div class="container" style="width: 50%; margin: 0 auto;">
-            <div class="jumbotron" style="margin-top: 20px;">
+        <div class="container">
+            <div class="jumbotron">
                 <h1> Courses List</h1>
                 <p> Here you can see all available courses for you</p>
             </div>
@@ -12,11 +12,11 @@
                 <div class="alert-danger"> {{ error_msg }}</div>
             {% endif %}
         <div class="row">
-            <div class="col-md-12" style="">
+            <div class="col-md-12">
                 <ul class="list-group" >
                     {% for course in all_courses %}
                     <li class="list-group-item" style="height: 60px;">
-                        <div class="col-md-3">
+                        <div class="col-md-3" >
                             <a href="{% url 'courses:course_info' course.id %}">{{ course.name }}</a>
                         </div>
                         <div class="col-md-6">

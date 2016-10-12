@@ -16,11 +16,12 @@ def course_details(request, course_id):
 def follow(request):
     all_courses = Course.objects.all()
     context = {'all_courses': all_courses}
+    error_msg = 'Could not follow course'
     try:
         followed_course = all_courses.get(pk=request.POST['course'])
         print('Followed course: ' + str(followed_course))
     except (KeyError, Course.DoesNotExist):
-        return render(request, 'courses/index.html', context)
+        return render(request, 'courses/index.html', context, error_msg)
     else:
         followed_course.is_followed = True
         followed_course.save()

@@ -1,0 +1,12 @@
+.container {
+    width: 50%; margin: 0 auto;
+}
+.jumbotrone {
+    margin-top: 20px;
+}
+.course-info {
+    text-align: center
+}
+.navbar {
+    border-radius: 0px;
+}
