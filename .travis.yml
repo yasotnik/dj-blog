@@ -1,11 +1,11 @@
 language: python
 python:
-  - "3.4"
+- '3.4'
 env:
-  - DJANGO=1.9.1
+  secure: KPuRn0+jHjuy7vD9mIVJwrEUKQteyCNjFQl9L3MGOgeghdbF6Suys7Rpuhtfjk0zt+xHBDG4wNswL/z5k8Dk+QaNneMTw6GccqOQiNzU+TzpGtvV1GwRqKA9TJbemRrtWw6fAD5gZFEcuGTiAl6XsQ2JVuyE788zaSSWvfdK5Po4uenQQfYGFfCOSsdYEzBbEBh3z73F3ibGRGtjORm7TaSF05ToTyCPtZ6dhWriCOdykL8fxKwYsudMDMBQIe18SzLDBbsWjeeZyZhtaXTB8FpTsp9HSRcSryIOKL+lYjqAOPA81h7MG5wuupumrHIsy5hKkp83vJ0peCiSmEmcga9+d4wYCPOAfWueYX1B7jYkb9dggk9QU2TpkI2+kcHjxCgcVCGiWSxJryEE9P22vc9Cy566QG75p7yCipa/0dB77EhdRA+DRHzCAlMD0dFSOVjozsbsQ7r7YsIkmXR64nNZFCUr5gR4tXJkoXZmD7uAOnH1+BlPZQayAdQtigKmUK197c2XGGYWo4TLJpk7tzAqsTzk/NetYJGNSZRuKVssQkI/OnYntmNDslIzLxdeA84H5YKDNmsli5F+BCnThDwgJrhpxErcmp6qpkM5KMWiIDIZZsYwGUd2cDo/DJo0sCbBxFxA7TZ84iWCVnBxufiDu5uYjxRf1urbyqMdb6k=
 install:
-  - pip install -q Django==$DJANGO --use-mirrors
-  - pip install pep8 --use-mirrors
-  - pip install -r requirements.txt
+- pip install -q Django==$DJANGO --use-mirrors
+- pip install pep8 --use-mirrors
+- pip install -r requirements.txt
 script:
-  - python manage.py runserver
+- python manage.py test
