@@ -1,14 +1,11 @@
 language: python
-
+python:
+  - "3.4"
 env:
   - DJANGO=1.9.1
-  - DJANGO_SETTINGS_MODULE="dj_blog.settings"
-  - PYTHONPATH="/home/sotnyk/.virtualenvs/dj_blog"
-
-python:
-    - 3.4
-
-install: "pip install -r requirements.txt"
-
+install:
+  - pip install -q Django==$DJANGO --use-mirrors
+  - pip install pep8 --use-mirrors
+  - pip install -r requirements.txt
 script:
-  - python manage.py runserver
+  - python setup.py test
