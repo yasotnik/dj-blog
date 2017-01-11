@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
 from .models import Course
 
 from django.views import generic
@@ -16,17 +18,20 @@ class DetailView(generic.DetailView):
     template_name = 'courses/course.html'
 
 
-"""
-def index(request):
-    all_courses = Course.objects.all()
-    context = {'all_courses': all_courses}
-    return render(request, 'courses/index.html', context)
+class CourseCreate(CreateView):
+    model = Course
+    fields = ['name', 'teacher', 'length', 'field', 'course_logo']
 
 
-def course_details(request, course_id):
-    course = get_object_or_404(Course, pk=course_id)
-    return render(request, 'courses/course.html', {'course': course})
-"""
+class CourseUpdate(UpdateView):
+    model = Course
+    fields = ['name', 'teacher', 'length', 'field', 'course_logo']
+
+
+class CourseDelete(DeleteView):
+    model = Course
+    success_url = reverse_lazy('courses:index')
+
 
 def follow(request):
     all_courses = Course.objects.all()
