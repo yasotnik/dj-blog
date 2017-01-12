@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'add/$', views.CourseCreate.as_view(), name='add_course'),
 
     # URL for update course
-    url(r'update/(?P<pk>[0-9]+)/', views.CourseUpdate.as_view(), name='course_update'),
+    url(r'update/(?P<pk>[0-9]+)/$', views.CourseUpdate.as_view(), name='course_update'),
 
     # /courses/id/delete
     url(r'(?P<pk>[0-9]+)/delete/$', views.CourseDelete.as_view(), name='course_delete'),

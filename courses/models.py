@@ -7,7 +7,7 @@ class Course(models.Model):
     teacher = models.CharField(max_length=50)
     length = models.IntegerField()
     field = models.CharField(max_length=150)
-    course_logo = models.CharField(max_length=1000)
+    course_logo = models.FileField()
     is_followed = models.BooleanField(default=False)
 
     def get_absolute_url(self):
