@@ -44,18 +44,27 @@ class UserFormView(View):
     # display blank form
     def get(self, request):
         form = self.form_class(None)
-        return render(request, self.template_name, {form:'form'})
+        return render(request, self.template_name, {'form': form})
 
     # reg user
     def post(self, request):
         form = self.form_class(request.POST)
-
         if form.is_valid():
             user = form.save(commit=False)
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user.set_password(password)
             user.save()
+
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('courses:index')
+
+        return render(request, self.template_name, {'form': form})
+
 
 def follow(request):
     all_courses = Course.objects.all()

@@ -9,6 +9,9 @@ urlpatterns = [
     # URL for course list /courses
     url(r'^$', views.CoursesView.as_view(), name='index'),
 
+    # URL for course list /courses
+    url(r'^register/$', views.UserFormView.as_view(), name='register'),
+
     # URL for exact course /course/id/
     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='course_info'),
     # URL for following the course
