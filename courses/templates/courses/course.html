@@ -10,12 +10,21 @@
             <p> by {{ course.teacher }} </p>
         </div>
     </div>
-    Lectures list:
-    <ul class="list-group">
-        {% for lecture in course.lecture_set.all %}
-            <li class="list-group-item"><a href="{{ lecture.lecture_url }}/"> {{ lecture.lecture_name }} </a><span
-                    class="badge">{{ lecture.file_type }}</span></li>
-        {% endfor %}
-    </ul>
+    <div class="col-lg-12">
+        <div class="col-lg-6"><strong><h4>Lectures list:</h4></strong></div>
+        <div class="col-lg-4"></div>
+        <div class="col-lg-2">
+            <a href="{% url 'courses:add_lecture' %}"><button type="submit"  class="btn btn-default">Add
+                lecture</button></a>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <ul class="list-group">
+            {% for lecture in course.lecture_set.all %}
+                <li class="list-group-item"><a href="{{ lecture.lecture_url }}/"> {{ lecture.lecture_name }} </a><span
+                        class="badge">{{ lecture.file_type }}</span></li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock content %}

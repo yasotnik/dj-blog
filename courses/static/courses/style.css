@@ -4,6 +4,9 @@
 .container {
     width: 50%; margin: 0 auto;
 }
+.add-form {
+    width: 50%; margin: 0 auto;
+}
 .jumbotrone {
     margin-top: 20px;
 }

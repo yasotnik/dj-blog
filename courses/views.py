@@ -4,8 +4,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
 from .forms import UserForm
-from django.core.urlresolvers import reverse_lazy
-from .models import Course
+from django.core.urlresolvers import reverse_lazy, reverse
+from .models import Course, Lecture
 
 from django.views import generic
 
@@ -37,6 +37,14 @@ class CourseDelete(DeleteView):
     success_url = reverse_lazy('courses:index')
 
 
+class LectureCreate(CreateView):
+    model = Lecture
+    # print(course_pk)
+    fields = ['course', 'file_type', 'lecture_name', 'lecture_url']
+    success_url = reverse_lazy('courses:index')
+    # success_url = reverse_lazy('courses:course_info', kwargs={'pk': course_pk})
+
+
 class UserFormView(View):
     form_class = UserForm
     template_name = 'courses/registration.html'
@@ -64,33 +72,3 @@ class UserFormView(View):
                     return redirect('courses:index')
 
         return render(request, self.template_name, {'form': form})
-
-
-def follow(request):
-    all_courses = Course.objects.all()
-    context = {'all_courses': all_courses}
-    error_msg = 'Could not follow course'
-    try:
-        followed_course = all_courses.get(pk=request.POST['course'])
-        print('Followed course: ' + str(followed_course))
-    except (KeyError, Course.DoesNotExist):
-        return CoursesView.as_view()
-    else:
-        followed_course.is_followed = True
-        followed_course.save()
-        return CoursesView.as_view()
-
-
-def un_follow(request):
-    all_courses = Course.objects.all()
-    context = {'all_courses': all_courses}
-    print("form post: " + str(request.POST['course']))
-    try:
-        followed_course = all_courses.get(pk=request.POST['course'])
-        print('Unfollowed course: ' + str(followed_course))
-    except (KeyError, Course.DoesNotExist):
-        return render(request, 'courses/index.html', context)
-    else:
-        followed_course.is_followed = False
-        followed_course.save()
-        return render(request, 'courses/index.html', context)
